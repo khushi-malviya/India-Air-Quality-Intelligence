@@ -1,0 +1,29 @@
+﻿# Data manipulation
+pandas
+numpy
+
+# Data visualisation
+matplotlib
+seaborn
+plotly
+
+# Statistics and machine learning
+scipy
+statsmodels
+scikit-learn
+
+# Database
+sqlalchemy
+
+# Data acquisition
+requests
+
+# Interactive application
+streamlit
+
+# Jupyter notebooks
+jupyter
+ipykernel
+
+# Automated testing
+pytest
