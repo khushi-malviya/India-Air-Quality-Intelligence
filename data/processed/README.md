@@ -1,17 +1,38 @@
 ﻿# Processed Data
 
-This directory is reserved for datasets generated during cleaning, validation, and feature engineering.
+This folder contains transformed and analysis-ready versions of the
+India CPCB Air Quality dataset.
 
-Processed files should be reproducible from the documented source data and project code.
+## Files
 
-Before creating a processed dataset, document:
+### 1. air_quality_hourly.parquet
 
-- Input dataset and source
-- Transformations and cleaning rules
-- Missing-value handling
-- Duplicate handling
-- Date and station identifier treatment
-- Output schema and file format
-- Validation checks and known limitations
+- Contains the complete hourly-level dataset.
+- Original wide-format data transformed into long format.
+- Includes station metadata, date, hour, timestamp, AQI, and AQI status.
+- Preserves missing and out-of-range AQI observations.
 
-Processed datasets are intentionally excluded from version control. Small, reproducible examples may be added separately when useful and permitted by the source license.
+### 2. air_quality_analytical.parquet
+
+- Contains the complete transformed dataset with an additional
+  AQI_Valid column.
+- AQI_Valid contains values only when AQI_Status is "valid".
+- Missing and out-of-range readings are represented as null in AQI_Valid.
+- Intended for statistical analysis and visualisation.
+
+## Transformation Summary
+
+- Original records: 562,878
+- Original columns: 29
+- Hourly observations after transformation: 13,509,072
+- Valid AQI readings: 12,473,485
+- Missing AQI readings: 1,035,531
+- Out-of-range readings (AQI > 500): 56
+
+## Data Handling Decisions
+
+- Missing AQI values were not replaced with zero or averages.
+- Out-of-range readings were retained in the original AQI column.
+- Out-of-range readings were excluded from AQI_Valid.
+- Station identity uses State, City, and Station Name.
+- Parquet format was selected for efficient storage and analytical use.
