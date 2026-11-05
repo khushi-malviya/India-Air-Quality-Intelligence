@@ -1,0 +1,78 @@
+{
+    "project": "India Air Quality Intelligence",
+    "model_name": "HistGradientBoostingRegressor",
+    "prediction_task": "24-hour AQI forecasting",
+    "target": "Target_AQI_24H",
+    "features": [
+        "AQI_Valid",
+        "AQI_Lag_1H",
+        "AQI_Lag_24H",
+        "AQI_Lag_168H",
+        "AQI_Rolling_Mean_24H",
+        "AQI_Rolling_Mean_7D",
+        "AQI_Rolling_Count_24H",
+        "AQI_Rolling_Count_7D",
+        "Hour_Number",
+        "Month",
+        "DayOfWeek",
+        "Is_Weekend",
+        "Hour_Sin",
+        "Hour_Cos",
+        "Month_Sin",
+        "Month_Cos",
+        "DayOfWeek_Sin",
+        "DayOfWeek_Cos"
+    ],
+    "training_period": "2017-2021",
+    "validation_period": "2022",
+    "testing_period": "2023",
+    "sample_sizes": {
+        "training": 300000,
+        "validation": 100000,
+        "testing": 100000
+    },
+    "model_parameters": {
+        "categorical_features": "from_dtype",
+        "early_stopping": true,
+        "interaction_cst": null,
+        "l2_regularization": 1.0,
+        "learning_rate": 0.08,
+        "loss": "squared_error",
+        "max_bins": 255,
+        "max_depth": null,
+        "max_features": 1.0,
+        "max_iter": 200,
+        "max_leaf_nodes": 31,
+        "min_samples_leaf": 30,
+        "monotonic_cst": null,
+        "n_iter_no_change": 10,
+        "quantile": null,
+        "random_state": 42,
+        "scoring": "loss",
+        "tol": 1e-07,
+        "validation_fraction": 0.1,
+        "verbose": 0,
+        "warm_start": false
+    },
+    "test_metrics": {
+        "baseline": {
+            "MAE": 38.86084,
+            "RMSE": 66.63667443682945,
+            "R2": 0.5270664309825353
+        },
+        "model": {
+            "MAE": 35.91094435265874,
+            "RMSE": 56.570461682218536,
+            "R2": 0.6591581157077917
+        }
+    },
+    "evaluation_method": "Chronological split; deterministic sample of 100,000 test observations",
+    "limitations": [
+        "Evaluated on a sample of the 2023 test population, not the full population.",
+        "Evaluates future observations for known monitoring stations, not unseen stations.",
+        "Prediction errors increase at higher AQI levels.",
+        "AQI values are bounded between 1 and 500.",
+        "Permutation importance is not a measure of causality."
+    ],
+    "created_at_utc": "2026-11-05T19:24:26.408466+00:00"
+}
