@@ -21,7 +21,14 @@ data/processed/*
 !data/raw/README.md
 !data/processed/README.md
 
-# Notebooks
+# DuckDB databases and temporary files
+*.duckdb
+*.duckdb.wal
+*.db
+*.tmp
+*.bak
+
+# Jupyter notebooks
 .ipynb_checkpoints/
 
 # Test and coverage output
