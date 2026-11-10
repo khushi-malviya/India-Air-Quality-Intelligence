@@ -31,29 +31,18 @@ st.markdown(
 # --------------------------------------------------
 # PROJECT PATHS
 # --------------------------------------------------
+from pathlib import Path
+from utils.data_loader import get_dataset_path
 
+# Project root
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-DATA_PATH = (
-    PROJECT_ROOT
-    / "data"
-    / "processed"
-    / "air_quality_model_ready.parquet"
-)
+# Dataset from Hugging Face
+DATA_PATH = get_dataset_path()
 
-MODEL_PATH = (
-    PROJECT_ROOT
-    / "models"
-    / "aqi_24h_hist_gradient_boosting.joblib"
-)
-
-METADATA_PATH = (
-    PROJECT_ROOT
-    / "models"
-    / "aqi_24h_model_metadata.json"
-)
-
-
+# Model and metadata from GitHub repository
+MODEL_PATH = PROJECT_ROOT / "models" / "aqi_24h_hist_gradient_boosting.joblib"
+METADATA_PATH = PROJECT_ROOT / "models" / "aqi_24h_model_metadata.json"
 # --------------------------------------------------
 # MODEL FEATURES
 # Keep this order consistent with training.

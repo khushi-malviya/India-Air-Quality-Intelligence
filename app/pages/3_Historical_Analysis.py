@@ -32,15 +32,9 @@ st.caption(
 # DATASET PATH
 # --------------------------------------------------
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+from utils.data_loader import get_dataset_path
 
-DATA_PATH = (
-    PROJECT_ROOT
-    / "data"
-    / "processed"
-    / "air_quality_model_ready.parquet"
-)
-
+DATA_PATH = get_dataset_path()
 
 # --------------------------------------------------
 # DATA LOADING

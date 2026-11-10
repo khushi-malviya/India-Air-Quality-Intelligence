@@ -4,7 +4,7 @@ from pathlib import Path
 import duckdb
 import pandas as pd
 import streamlit as st
-
+from huggingface_hub import hf_hub_download
 
 # Project directory
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
@@ -17,6 +17,19 @@ DATA_PATH = (
     / "air_quality_model_ready.parquet"
 )
 
+@st.cache_resource
+def get_dataset_path():
+    """
+    Download the model-ready dataset from Hugging Face.
+    Hugging Face caches the file locally to avoid repeated downloads.
+    """
+    dataset_path = hf_hub_download(
+        repo_id="khushimalviya/india-air-quality-data",
+        filename="air_quality_model_ready.parquet",
+        repo_type="dataset"
+    )
+
+    return Path(dataset_path)
 
 @st.cache_data
 def get_dataset_summary():
@@ -54,7 +67,7 @@ def get_dataset_summary():
 
                 ROUND(AVG(AQI_Valid), 2) AS average_aqi
 
-            FROM read_parquet('{DATA_PATH.as_posix()}')
+            FROM read_parquet('{get_dataset_path().as_posix()}')
         """
 
         result = con.execute(query).df()
@@ -76,7 +89,7 @@ def get_city_options():
     try:
         query = f"""
             SELECT DISTINCT City
-            FROM read_parquet('{DATA_PATH.as_posix()}')
+            FROM read_parquet('{get_dataset_path().as_posix()}')
             WHERE City IS NOT NULL
             ORDER BY City
         """
